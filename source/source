@@ -1,5 +1,0 @@
-import time
-import random
-import brain
-
-t = Brain(2,6,4)

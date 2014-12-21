@@ -1,0 +1,2 @@
+# We dont need to worry about the compiled python files
+*.pyc
