@@ -33,6 +33,11 @@ class Brain(object):
     def tanh(self, x):
         return math.tanh(x)
     # end def tanh
+    
+    
+    def gaussian(self, x):
+        return math.exp(-x * x)
+    # end def gaussian
 
 
     def weaken_weights(self):
@@ -57,7 +62,7 @@ class Brain(object):
     # end def strengthen_weights
 
     
-    def run_brain(self, inputs, tweak_bool):
+    def train_brain(self, inputs, tweak_bool):
         self.inputs = inputs
         
         if random.random() <= 0.01 and tweak_bool:
@@ -75,7 +80,26 @@ class Brain(object):
                 x += self.hidden[h] * self.ho_weights[h][o]
             self.output[o] = self.sigmoid(x)
 
-        return self.output.index(max(self.output))
+        return self.output
+    # end def run_brain
+    
+    
+    def run_brain(self, inputs):
+        self.inputs = inputs
+        
+        for h in xrange(self.hidden_size):
+            x = 0.0
+            for i in xrange(self.input_size):
+                x += self.inputs[i] * self.ih_weights[i][h]
+            self.hidden[h] = self.sigmoid(x)
+            
+        for o in xrange(self.output_size):
+            x = 0.0
+            for h in xrange(self.hidden_size):
+                x += self.hidden[h] * self.ho_weights[h][o]
+            self.output[o] = self.sigmoid(x)
+
+        return self.output
     # end def run_brain
 
 # end class Brain
