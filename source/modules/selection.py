@@ -3,23 +3,39 @@ import brain
 import random
 
 
-def tournament_selection(population, tournament_faction_size):
+def tournament_distance_selection(population, tournament_size):
     random.seed()
     
-    tournament_size = int(len(population) / tournament_fraction_size)
-    best = population[random.randint(0,len(population)-1)]
+    length = len(population) - 1
+    mate_1 = population[random.randint(0,length)]
+    mate_2 = population[random.randint(0,length)]
     
     for i in xrange(tournament_size):
-        individual = population[random.randint(0,len(population)-1)]
-        distance1 = ((individual.goal[0] - individual.location[0])**2) + ((individual.goal[1] - individual.location[1])**2)
-        distance2 = ((best.goal[0] - best.location[0])**2) + ((best.goal[1] - best.location[1])**2)
-        distance1 = math.sqrt(distance1) - individual.count
-        distance2 = math.sqrt(distance2) - best.count
-        if distance1 < distance2:
-            best = individual
+        individual_1 = population[random.randint(0,length)]
+        individual_2 = population[random.randint(0,length)]
         
-    return best
+        distance_1 = ((individual_1.goal[0] - individual_1.location[0])**2) + ((individual_1.goal[1] - individual_1.location[1])**2)
+        distance_2 = ((individual_2.goal[0] - individual_2.location[0])**2) + ((individual_2.goal[1] - individual_2.location[1])**2)
+        distance_3 = ((mate_1.goal[0] - mate_1.location[0])**2) + ((mate_1.goal[1] - mate_1.location[1])**2)
+        distance_4 = ((mate_2.goal[0] - mate_2.location[0])**2) + ((mate_2.goal[1] - mate_2.location[1])**2)
+        
+        distance_1 = math.sqrt(distance_1) - individual_1.count
+        distance_2 = math.sqrt(distance_2) - individual_2.count
+        distance_3 = math.sqrt(distance_3) - mate_1.count
+        distance_4 = math.sqrt(distance_4) - mate_2.count
+        
+        if distance_1 < distance_3:
+            mate_1 = individual_1
+        
+        if distance_2 < distance_4:
+            mate_2 = individual_2
+    
+    new_bug = mate_1.procreate(mate_2, 0.01)
+    
+    return new_bug
 # end def tournament_selection
+
+def tournament_count_selection(population, tournament_size):
 
 
 def average_selection(population):

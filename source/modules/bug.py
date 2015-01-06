@@ -15,7 +15,7 @@ class Bug(object):
         self.location = [random.randint(min_grid_edge,max_grid_edge),random.randint(min_grid_edge,max_grid_edge)]
         self.count    = 0
         self.age      = 0
-        self.goal     = [random.randint(min_grid_edge,max_grid_edge),random.randint(min_grid_edge,max_grid_edge)]
+        self.goal     = [0,0]
     # end def __init__
     
 
@@ -23,7 +23,7 @@ class Bug(object):
         self.energy -= 1
 
         direction = self.brain.train_brain([(self.location[0]-self.goal[0]),(self.location[1]-self.goal[1])],modify_weights)
-        direction = direction.index(max(direction))
+        direction = direction.index(max(direction))((individual.goal[0] - individual.location[0])**2) + ((individual.goal[1] - individual.location[1])**2)
         
         if direction == 0:
             self.location[0] += 1
@@ -50,6 +50,14 @@ class Bug(object):
         
         return False
     # end def time_tick
+    
+    
+    def distance_to_goal(self):
+        x_distance = ((self.goal[0] - self.location[0])**2)
+        y_distance = ((self.goal[1] - self.location[1])**2)
+        
+        return math.sqrt(x_distance + y_distance)
+    # end def distance_to_goal
 
 
     def procreate(self, other_bug, mutation_chance):
@@ -70,9 +78,7 @@ class Bug(object):
                 else:
                     new_brain.ho_weights[h][o] = random.choice([self.brain.ho_weights[h][o],other_bug.brain.ho_weights[h][o]])
                     
-        new_bug = Bug(new_brain, 100, self.max_grid, self.min_grid)
-        
-        return new_bug
+        return Bug(new_brain, 100, self.max_grid, self.min_grid)
     # end def procreate
     
 # end class Bug
