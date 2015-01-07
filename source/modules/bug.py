@@ -20,10 +20,13 @@ class Bug(object):
     
 
     def time_tick(self,modify_weights):
+        if self.energy <= 0:
+            return False
         self.energy -= 1
 
         direction = self.brain.train_brain([(self.location[0]-self.goal[0]),(self.location[1]-self.goal[1])],modify_weights)
-        direction = direction.index(max(direction))((individual.goal[0] - individual.location[0])**2) + ((individual.goal[1] - individual.location[1])**2)
+        direction = direction[:4]
+        direction = direction.index(max(direction))
         
         if direction == 0:
             self.location[0] += 1
@@ -44,12 +47,17 @@ class Bug(object):
             self.location[1] = self.max_grid
         
         if self.location[0] == self.goal[0] and self.location[1] == self.goal[1]:
-            self.energy = 100
+            self.energy = 50
             self.count += 1
             return True
         
         return False
     # end def time_tick
+
+
+    def attack(self, other_bug):
+        return True
+    # end def attack
     
     
     def distance_to_goal(self):
@@ -78,7 +86,7 @@ class Bug(object):
                 else:
                     new_brain.ho_weights[h][o] = random.choice([self.brain.ho_weights[h][o],other_bug.brain.ho_weights[h][o]])
                     
-        return Bug(new_brain, 100, self.max_grid, self.min_grid)
+        return Bug(new_brain, 50, self.max_grid, self.min_grid)
     # end def procreate
     
 # end class Bug
