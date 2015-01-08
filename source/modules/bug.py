@@ -19,22 +19,37 @@ class Bug(object):
     # end def __init__
     
 
-    def time_tick(self,modify_weights):
-        if self.energy <= 0:
-            return False
+    def time_tick(self,train):
+        #if self.energy <= 0:
+        #    return False
         self.energy -= 1
-
-        direction = self.brain.train_brain([(self.location[0]-self.goal[0]),(self.location[1]-self.goal[1])],modify_weights)
-        direction = direction[:4]
+        
+        if train:
+            direction = self.brain.train_brain([(self.location[0]-self.goal[0]),(self.location[1]-self.goal[1])])
+        else:
+            direction = self.brain.run_brain([(self.location[0]-self.goal[0]),(self.location[1]-self.goal[1])])
+        #direction = direction[:]
         direction = direction.index(max(direction))
         
         if direction == 0:
             self.location[0] += 1
         elif direction == 1:
-            self.location[0] -= 1
+            self.location[0] += 1
+            self.location[0] += 1
         elif direction == 2:
             self.location[1] += 1
         elif direction == 3:
+            self.location[0] -= 1
+            self.location[1] += 1
+        elif direction == 4:
+            self.location[0] -= 1
+        elif direction == 5:
+            self.location[0] -= 1
+            self.location[1] -= 1
+        elif direction == 6:
+            self.location[1] -= 1
+        elif direction == 7:
+            self.location[0] += 1
             self.location[1] -= 1
             
         if self.location[0] > self.max_grid:

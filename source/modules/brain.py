@@ -62,10 +62,10 @@ class Brain(object):
     # end def strengthen_weights
 
     
-    def train_brain(self, inputs, tweak_bool):
+    def train_brain(self, inputs):
         self.inputs = inputs
         
-        if random.random() <= 0.01 and tweak_bool:
+        if random.random() <= 0.01:
             random.choice([self.weaken_weights(),self.strengthen_weights()])
         
         for h in xrange(self.hidden_size):

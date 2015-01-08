@@ -24,8 +24,8 @@ def display_grid(population, goal, grid_size):
 def generate_population(size):
     population = []
     for x in xrange(size):
-        b = brain.Brain(2,8,4)
-        i = bug.Bug(b, 50, 39,0)
+        b = brain.Brain(2,20,8)
+        i = bug.Bug(b,50,39,0)
         population.append(i)
         
     return population
@@ -90,6 +90,8 @@ def run_population(population, length):
         for i in population:
             best = 500
             bb = None
+            if len(food) < 1:
+                food.append([random.randint(0,39),random.randint(0,39)])
             for f in food:
                 distance = ((f[0] - i.location[0])**2) + ((f[1] - i.location[1])**2)
                 distance = math.sqrt(distance)
@@ -125,15 +127,16 @@ for i in xrange(2000):
 print (time.time() - t1)
 time.sleep(5)
 
+"""
 file = open('saved_weights.csv','w')
 
 for i in population:
     line = ''
     for inputs in xrange(2):
-        for hidden in xrange(6):
+        for hidden in xrange(8):
             line += str(i.brain.ih_weights[inputs][hidden]) + ','
     
-    for hidden in xrange(6):
+    for hidden in xrange(8):
         for output in xrange(4):
             line += str(i.brain.ho_weights[hidden][output]) + ','
             
@@ -142,6 +145,7 @@ for i in population:
     file.flush()
 
 file.close()
+"""
 
 for i in xrange(100):
     run_population(population, 200)
