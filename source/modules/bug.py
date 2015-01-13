@@ -1,17 +1,40 @@
+# -*- coding: utf-8 -*-
+
+# bug.py
+#
+# Created by Thomas Nelson <tn90ca@gmail.com>
+# Created..........2015-01-10
+# Last Modified....2015-01-10
+#
+# This module contains the bug class and was developed for use in the Bugs
+# project.
+
+
+# Import custom modules
 import brain
+import food
+
+# Import modules from standard libraries
 import time
 import math
 import random
 
+
 class Bug(object):
+  """The bug class is used to represent a single bug. Each bug will have a
+  series of qualities that are randomly assigned unless provided. This class
+  contains a series of functions so a bug may make descisions and perforrm a
+  variety of actions.
+  
+  """
     
-    def __init__(self, brain, energy, max_grid_edge, min_grid_edge):
+    def __init__(self, brain, health, hunger, size, color, gender, offspring, location):
         random.seed(time.time())
         
         self.brain    = brain
-        self.energy   = energy
-        self.max_grid = max_grid_edge
-        self.min_grid = min_grid_edge
+        self.health   = health
+        self.hunger   = hunger
+        self.
         self.location = [random.randint(min_grid_edge,max_grid_edge),random.randint(min_grid_edge,max_grid_edge)]
         self.count    = 0
         self.age      = 0
