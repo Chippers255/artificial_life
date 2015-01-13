@@ -3,8 +3,8 @@
 # dna.py
 #
 # Created by Thomas Nelson <tn90ca@gmail.com>
-# Created..........2015-01-12
-# Last Modified....2015-01-12
+# Created..........................2015-01-12
+# Last Modified....................2015-01-13
 #
 # This module contains the dna class and was developed for use in the Bugs
 # project.
@@ -22,13 +22,26 @@ class DNA(object):
     
     The Following is a list of chromosomes and their relative trait.
     
-    
+    c0: Bug Size
+    c1: Bug Gender
+    c2: Number of Offspring
+    c3: Food consumption type
+    c4: Number of Eyes
+    c5: Distance for vision
+    c6: Distance for smell
+    c7: Individual bug smell
+
+    c8: Weight matrix for brain between input and hidden layer
+    c9: Weight matric for brain between hidden and output layer
     
     """
     
     def __init__(self, dna, move_i, move_h, move_o):
-        """
-        
+        """This method will initialize a new dna sequence with two
+        possibilities. First a DNA sequence can be passed as an argument when
+        reproduction occurs. Secondly if no DNA sequence is pass ed then a
+        randomized DNA will be created, usually for initialization of bugs.
+
         """
         random.seed(time.time())
         
