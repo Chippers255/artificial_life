@@ -4,7 +4,7 @@
 #
 # Created by Thomas Nelson <tn90ca@gmail.com>
 # Created..........................2015-01-12
-# Last Modified....................2015-01-13
+# Modified.........................2015-01-20
 #
 # This module contains the dna class and was developed for use in the Bugs
 # project.
@@ -36,12 +36,19 @@ class DNA(object):
     
     """
     
-    def __init__(self, dna, move_i, move_h, move_o):
+    def __init__(self, dna, brain_i, brain_h, brain_o):
         """This method will initialize a new dna sequence with two
         possibilities. First a DNA sequence can be passed as an argument when
         reproduction occurs. Secondly if no DNA sequence is pass ed then a
         randomized DNA will be created, usually for initialization of bugs.
 
+        :param dna:     A precreated list of genes (usually from mating)
+        :param brain_i: Size of input layer for the brain
+        :param brain_h: Size of hidden layer for the brain
+        :param brain_o: Size of output layer for the brain
+        
+        :return: NaN
+        
         """
         random.seed(time.time())
         
@@ -70,6 +77,14 @@ class DNA(object):
     # end def __init__
     
     def bin_dec(self, chromosome):
+        """This method will convert a chromosome into a decimale value
+        for use in bug creation. 
+        
+        :param chromosome: A Chromosome in 2-pair list form
+        
+        :return: Integer value for a chromosome
+        
+        """
         trait = ''
         for gene in chromosome:
             trait += str(gene[0] & gene[1])
