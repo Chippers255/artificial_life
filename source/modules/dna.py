@@ -32,7 +32,7 @@ class DNA(object):
     c7: Individual bug smell
 
     c8: Weight matrix for brain between input and hidden layer
-    c9: Weight matric for brain between hidden and output layer
+    c9: Weight matrix for brain between hidden and output layer
     
     """
     
@@ -42,7 +42,8 @@ class DNA(object):
         reproduction occurs. Secondly if no DNA sequence is pass ed then a
         randomized DNA will be created, usually for initialization of bugs.
 
-        :param dna:     A precreated list of genes (usually from mating)
+        :param dna: A list of genes (usually from mating)
+        :type dna:
         :param brain_i: Size of input layer for the brain
         :param brain_h: Size of hidden layer for the brain
         :param brain_o: Size of output layer for the brain
