@@ -12,7 +12,8 @@
 import time
 import random
 
-class DNA(object):
+
+class DNA (object):
     """The DNA class is designed to hold all genetic material required for
     creating a bug. Each bug DNA contains 9 chromosomes for different traits
     for a bug. Each chromosome contains a list of genes and each gene has
@@ -35,7 +36,7 @@ class DNA(object):
     c9: Weight matrix for brain between hidden and output layer
     
     """
-    
+
     def __init__(self, dna, brain_i, brain_h, brain_o):
         """This method will initialize a new dna sequence with two
         possibilities. First a DNA sequence can be passed as an argument when
@@ -52,18 +53,18 @@ class DNA(object):
         
         """
         random.seed(time.time())
-        
+
         if dna == None:
-            self.c0 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(2)] # Bug Size
-            self.c1 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(1)] # Bug Gender
-            self.c2 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(3)] # Bug Offspring
-            self.c3 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(2)] # Bug Food
-            self.c4 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(3)] # Num Eyes
-            self.c5 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(2)] # sight distance
-            self.c6 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(4)] # olfactory distance
-            self.c7 = [[random.randint(0,1) for a in xrange(2)] for g in xrange(9)] # personal smell
-            self.c8 = [[random.uniform(-1,1) for h in xrange(move_h)] for i in xrange(move_i)] # movement brain i_h
-            self.c9 = [[random.uniform(-1,1) for o in xrange(move_o)] for h in xrange(move_h)] # movement brain h_o
+            self.c0 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(2)]
+            self.c1 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(1)]
+            self.c2 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(3)]
+            self.c3 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(2)]
+            self.c4 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(3)]
+            self.c5 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(2)]
+            self.c6 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(4)]
+            self.c7 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(9)]
+            self.c8 = [[random.uniform(-1, 1) for h in xrange(brain_h)] for i in xrange(brain_i)]
+            self.c9 = [[random.uniform(-1, 1) for o in xrange(brain_o)] for h in xrange(brain_h)]
         else:
             self.c0 = dna[0]
             self.c1 = dna[1]
@@ -76,7 +77,7 @@ class DNA(object):
             self.c8 = dna[8]
             self.c9 = dna[9]
     # end def __init__
-    
+
     def bin_dec(self, chromosome):
         """This method will convert a chromosome into a decimale value
         for use in bug creation. 
@@ -91,45 +92,45 @@ class DNA(object):
             trait += str(gene[0] & gene[1])
         return int(trait, 2)
     # end def bin_dec
-    
+
     def get_size(self):
         return self.bin_dec(self.c0)
     # end def get_size
-    
+
     def get_gender(self):
         return self.bin_dec(self.c1)
     # end def get_gender
-    
+
     def get_offspring(self):
         return self.bin_dec(self.c2)
     # end def get_offspring
-    
+
     def get_food(self):
         return self.bin_dec(self.c3)
     # end def get_food
-    
+
     def get_eyes(self):
         return self.bin_dec(self.c4)
     # end def get_size
-    
+
     def get_perception(self):
         return self.bin_dec(self.c5)
     # end def get_gender
-    
+
     def get_smell(self):
         return self.bin_dec(self.c6)
     # end def get_offspring
-    
+
     def get_odour(self):
         return self.bin_dec(self.c7)
     # end def get_offspring
-    
+
     def print_dna(self):
         print "C0: " + str(self.c0)
         print "Size: " + str(self.get_size())
         print
         print "C1: " + str(self.c1)
-        print "Gender: " + str(self.get_gender())
+        print "Gender: " + str(self.get_gender)
         print
         print "C2: " + str(self.c2)
         print "Offspring: " + str(self.get_offspring())
@@ -150,5 +151,5 @@ class DNA(object):
         print "Odour: " + str(self.get_odour())
         print
     # end def print_dna
-    
+
 # end class DNA
