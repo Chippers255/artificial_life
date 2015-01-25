@@ -1,16 +1,26 @@
 # -*- coding: utf-8 -*-
 
+"""Class for creating a working with Bug DNA and genetics."""
+
 # dna.py
 #
 # Created by Thomas Nelson <tn90ca@gmail.com>
 # Created..........................2015-01-12
-# Modified.........................2015-01-20
+# Modified.........................2015-01-25
 #
 # This module contains the dna class and was developed for use in the Bugs
 # project.
+#
+# Copyright (C) 2015 Thomas Nelson
 
-import time
+import os
+import sys
 import random
+
+lib_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(lib_path)
+
+from tools import math_tools
 
 
 class DNA (object):
@@ -22,8 +32,8 @@ class DNA (object):
     the two allele together.
     
     The Following is a list of chromosomes and their relative trait.
-    
-    c0: Bug Size
+
+    c]: Bug Size
     c1: Bug Gender
     c2: Number of Offspring
     c3: Food consumption type
@@ -44,17 +54,25 @@ class DNA (object):
         randomized DNA will be created, usually for initialization of bugs.
 
         :param dna: A list of genes (usually from mating)
-        :type dna:
+        :type dna: integer matrix
+
         :param brain_i: Size of input layer for the brain
+        :type brain_i: integer
+
         :param brain_h: Size of hidden layer for the brain
+        :type brain_h: integer
+
         :param brain_o: Size of output layer for the brain
+        :type brain_o: integer
         
-        :return: NaN
+        :return: A new instance of DNA
         
         """
-        random.seed(time.time())
 
-        if dna == None:
+        # Seed the random generator with current time
+        random.seed()
+
+        if dna is None:
             self.c0 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(2)]
             self.c1 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(1)]
             self.c2 = [[random.randint(0, 1) for a in xrange(2)] for g in xrange(3)]
@@ -78,51 +96,52 @@ class DNA (object):
             self.c9 = dna[9]
     # end def __init__
 
-    def bin_dec(self, chromosome):
-        """This method will convert a chromosome into a decimale value
-        for use in bug creation. 
-        
-        :param chromosome: A Chromosome in 2-pair list form
-        
-        :return: Integer value for a chromosome
-        
-        """
-        trait = ''
-        for gene in chromosome:
-            trait += str(gene[0] & gene[1])
-        return int(trait, 2)
-    # end def bin_dec
-
+    @property
     def get_size(self):
-        return self.bin_dec(self.c0)
+        return math_tools.bin_dec(self.c0)
+
     # end def get_size
 
+    @property
     def get_gender(self):
-        return self.bin_dec(self.c1)
+        return math_tools.bin_dec(self.c1)
+
     # end def get_gender
 
+    @property
     def get_offspring(self):
-        return self.bin_dec(self.c2)
-    # end def get_offspring
+        return math_tools.bin_dec(self.c2)
 
+    # end def get_offspring
+    
+    @property
     def get_food(self):
-        return self.bin_dec(self.c3)
+        return math_tools.bin_dec(self.c3)
+
     # end def get_food
 
+    @property
     def get_eyes(self):
-        return self.bin_dec(self.c4)
+        return math_tools.bin_dec(self.c4)
+
     # end def get_size
 
+    @property
     def get_perception(self):
-        return self.bin_dec(self.c5)
+        return math_tools.bin_dec(self.c5)
+
     # end def get_gender
 
+    @property
     def get_smell(self):
-        return self.bin_dec(self.c6)
+        return math_tools.bin_dec(self.c6)
+
     # end def get_offspring
 
+    @property
     def get_odour(self):
-        return self.bin_dec(self.c7)
+        return math_tools.bin_dec(self.c7)
+
     # end def get_offspring
 
     def print_dna(self):
@@ -145,10 +164,10 @@ class DNA (object):
         print "Perception: " + str(self.get_perception())
         print
         print "C6: " + str(self.c6)
-        print "Smell: " + str(self.get_smell())
+        print "Smell: " + str(self.get_smell)
         print
         print "C7: " + str(self.c7)
-        print "Odour: " + str(self.get_odour())
+        print "Odour: " + str(self.get_odour)
         print
     # end def print_dna
 

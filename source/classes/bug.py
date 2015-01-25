@@ -44,7 +44,7 @@ class Bug(object):
         self.food       = self.dna.get_food()
         self.eyes       = self.get_eyes()
         self.perception = self.get_perception()
-        self.smell      = self.dna.get_smell()
+        self.smell      = self.dna.get_smell
         self.odour      = self.get_odour()
 
         self.count    = 0
